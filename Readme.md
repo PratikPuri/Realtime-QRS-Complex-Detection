@@ -5,7 +5,27 @@ Arrhythmia is the condition of improper beating of the heart, whether irregular,
 Precision of such devices is a necessity, otherwise false data gets transmitted to the station which not help the physician. Also, large memory is required to store the ECG segments which are unnecessarily captured.
 <br>
 
+<h2>Code execution steps</h2>
+Run the matlab file ECG_signal
+
+To select one of three database signals:
+1) Enter 1 for 100m file
+2) Enter 2 for 101m file
+3) Enter 3 for 102m file
+
+Six figures are shown as output:
+Figure 1) : Initial Signal
+Figure 2) : Low pass filter output
+Figure 3) : Band pass filter output
+Figure 4) : Differentiated output of the above signal
+Figure 5) : Squared output of the above signal
+Figure 6) : Final Output through integrator
+
+The total number of beats and heart rate is displayed in the command window  
+
 <h2>Processing of the given signal</h2>
+
+```
 Taking the input:
 disp('1: 100m')
 disp('2: 101m')
@@ -19,7 +39,10 @@ load ('101m.mat')
 elseif f == 3
 load ('102m.mat')
 end
+```
 <h2>Corresponding database signal</h2>
+
+```
 val = (val-1024)/200;
 E = val(1,1:650000);
 E = 5.2+E;
@@ -28,8 +51,11 @@ t = (0:length(E)-1)/fs;
 figure; plot(t,E)
 xlabel("Time"), ylabel("Signal")
 title("Initial Signal")
+```
 Note : All the signals shown here are zoomed in to visualize the results properly.
 <h2>Low pass filtering</h2>
+
+```
 a = [1,0,0,0,0,0,-2,0,0,0,0,0,1];
 b = [1,-2,1];
 E =filter(a,b,E);
@@ -53,7 +79,10 @@ E=y;
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
 title("Differentiator output of band pass filtered signal")
+```
 <h2>Squaring</h2>
+
+```
 E= E.^2;
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
@@ -65,30 +94,13 @@ E=filter(f,g,E);
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
 title("Output of signal passed through moving window integrator")
-<h2>Combined Processing of signal</h2>
+```
+Combined Processing of signal
 <h2>References</h2>
+
 1) https://www.physionet.org/physiobank/database/mitdb/
 2) https://archive.ics.uci.edu/ml/datasets/arrhythmia
 3) https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4122029
 4) https://stackoverflow.com/questions/6283929/load-mit-bih-arrhythmia-ecg-database-onto-matlab
 5) http://physionet.org/cgi-bin/atm/ATM
 6) https://ecgwaves.com/
-
-
-
-Run the matlab file ECG_signal
-
-To select one of three database signals:
-1) Enter 1 for 100m file
-2) Enter 2 for 101m file
-3) Enter 3 for 102m file
-
-Six figures are shown as output:
-Figure 1) : Initial Signal
-Figure 2) : Low pass filter output
-Figure 3) : Band pass filter output
-Figure 4) : Differentiated output of the above signal
-Figure 5) : Squared output of the above signal
-Figure 6) : Final Output through integrator
-
-The total number of beats and heart rate is displayed in the command window  

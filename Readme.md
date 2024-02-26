@@ -3,6 +3,9 @@
 The QRS complex is a name for the combination of three of the graphical deflections seen on a typical electrocardiogram (EKG or ECG). It corresponds to the depolarization of the right and left ventricles of the human heart.
 Arrhythmia is the condition of improper beating of the heart, whether irregular, too fast or too slow. Arrhythmia monitors help in real time checking and transmission of abnormal ECG signals to a central station, during the time the patient is moved over to the hospital in an ambulance. A physician present at the respective station interprets the said signal and thus, gets time to make the necessary preparations before the arrival of the patient.
 Precision of such devices is a necessity, otherwise false data gets transmitted to the station which not help the physician. Also, large memory is required to store the ECG segments which are unnecessarily captured.
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot.jpg"><br>
+</p>
 <br>
 
 <h2>Code execution steps</h2>
@@ -53,6 +56,9 @@ xlabel("Time"), ylabel("Signal")
 title("Initial Signal")
 ```
 Note : All the signals shown here are zoomed in to visualize the results properly.
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot1.jpg"><br>
+</p>
 <h2>Low pass filtering</h2>
 
 ```
@@ -62,6 +68,9 @@ E =filter(a,b,E);
 figure; plot(t,E)
 xlabel("Time"), ylabel("Signal")
 title("Low pass filtered signal")
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot2.jpg"><br>
+</p>
 <h2>High pass filtering of low pass filtered signal (Band pass filtering)</h2>
 c=[-1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1];
 d=[1,1];
@@ -69,6 +78,9 @@ E =filter(c,d,E);
 figure; plot(t,E)
 xlabel("Time"), ylabel("Signal")
 title("Band pass filtered signal")
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot3.jpg"><br>
+</p>
 • Differentiator:
 y = 0;
 x = E;
@@ -79,7 +91,9 @@ E=y;
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
 title("Differentiator output of band pass filtered signal")
-```
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot4.jpg"><br>
+</p>
 <h2>Squaring</h2>
 
 ```
@@ -87,6 +101,9 @@ E= E.^2;
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
 title("Squared output of differentiated and band pass filtered signal")
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot5.jpg"><br>
+</p>
 <h2>Moving Window Integration</h2>
 f=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 g=[1];
@@ -94,8 +111,13 @@ E=filter(f,g,E);
 figure; plot(E)
 xlabel("Time"), ylabel("Signal")
 title("Output of signal passed through moving window integrator")
-```
-Combined Processing of signal
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot5.jpg"><br>
+</p>
+<h2>Combined Processing of signal</h2>
+<p align = "center">
+<img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot6.jpg"><br>
+</p>
 <h2>References</h2>
 
 1) https://www.physionet.org/physiobank/database/mitdb/

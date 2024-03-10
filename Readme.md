@@ -1,33 +1,34 @@
 <h1>A Real-Time QRS Detection Algorithm</h1>
 <h2>Introduction</h2>
-The QRS complex is a name for the combination of three of the graphical deflections seen on a typical electrocardiogram (EKG or ECG). It corresponds to the depolarization of the right and left ventricles of the human heart.
-Arrhythmia is the condition of improper beating of the heart, whether irregular, too fast or too slow. Arrhythmia monitors help in real time checking and transmission of abnormal ECG signals to a central station, during the time the patient is moved over to the hospital in an ambulance. A physician present at the respective station interprets the said signal and thus, gets time to make the necessary preparations before the arrival of the patient.
-Precision of such devices is a necessity, otherwise false data gets transmitted to the station which not help the physician. Also, large memory is required to store the ECG segments which are unnecessarily captured.
+Arrhythmia is the condition of improper beating of the heart, wherein the heart beat could be irregular, too fast or too slow. During dire situations Arrhythmia monitors help in real time transmission of ECG signals to a central station, while the patient is moved over to a hospital in an ambulance. A physician present at the respective hospital interprets the said signal and thus, gets time to make the necessary preparations before the arrival of the patient. The QRS complex found within ECG signals is useful in diagnosing cardiac arrhythmias, conduction abnormalities, ventricular hypertrophy, myocardial infarction, electrolyte derangements, and other disease states. QRS complex is a name given to the combination of three graphical deflections seen on a typical electrocardiogram - please refer the diagram below. <ins><b>This project illustrates the precise algorithm used in real time detection of such QRS signals, which helps in cutting down on the physician's effort and memory required to store complete ECG segments.</b></ins>
 <br><br>
 <p align = "center">
 <img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot.jpg" width = 800 height = 400><br>
 </p>
-<br>
-
 <h2>Code execution steps</h2>
-Run the matlab file ECG_signal
+Run the following matlab file: ECG_signal
 
-To select one of three database signals:
+<h3>Input</h3>
+
+Select one of three database signals:
 1) Enter 1 for 100m file
 2) Enter 2 for 101m file
 3) Enter 3 for 102m file
 
-Six figures are shown as output:
-Figure 1) : Initial Signal
-Figure 2) : Low pass filter output
-Figure 3) : Band pass filter output
-Figure 4) : Differentiated output of the above signal
-Figure 5) : Squared output of the above signal
-Figure 6) : Final Output through integrator
+<h3>Output</h3>
 
-The total number of beats and heart rate is displayed in the command window  
+The total number of heart beats and heart rate is provided as output within the command line. Seven figures are also generated as output in the following order:
+1) Initial Signal
+2) Low pass filter output
+3) Band pass filter output
+4) Differentiated output of the above signal
+5) Squared output of the above signal
+6) Final Output through integrator
+7) Complete lifecycle discussed above within a single figure
 
-<h2>Processing of the given signal</h2>
+The algorithm executes in the following order:
+
+<h2>Selection of the input ECG signal</h2>
 
 ```
 Taking the input:
@@ -44,7 +45,7 @@ elseif f == 3
 load ('102m.mat')
 end
 ```
-<h2>Corresponding database signal</h2>
+<h2>Initial processing of the selected signal</h2>
 
 ```
 val = (val-1024)/200;
@@ -56,11 +57,11 @@ figure; plot(t,E)
 xlabel("Time"), ylabel("Signal")
 title("Initial Signal")
 ```
-Note : All the signals shown here are zoomed in to visualize the results properly.
+
 <p align = "center">
 <img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot1.jpg" width = 650 height = 400><br>
 </p>
-<h2>Low pass filtering</h2>
+<h2>Low pass filtering of the selected signal</h2>
 
 ```
 a = [1,0,0,0,0,0,-2,0,0,0,0,0,1];
@@ -86,7 +87,7 @@ title("Band pass filtered signal")
 <p align = "center">
 <img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot3.jpg" width = 650 height = 400><br>
 </p>
-• Differentiator:
+<h2>Differentiation</h2>
 
 ```
 y = 0;
@@ -127,7 +128,7 @@ title("Output of signal passed through moving window integrator")
 <p align = "center">
 <img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot6.jpg" width = 650 height = 400><br>
 </p>
-<h2>Combined Processing of signal</h2>
+<h2>Complete lifecycle discussed above within a single figure</h2>
 <p align = "center">
 <img src = "https://github.com/PratikPuri/Realtime-QRS-Complex-Detection/blob/master/images/plot7.jpg" width = 650 height = 400><br>
 </p>
